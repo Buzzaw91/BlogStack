@@ -16,7 +16,9 @@
         "pg": "^8.7.1",
         "slugify": "^1.6.2"
     },
-    "scripts": {},
+    "scripts": {
+        "start": "nodemon server/index.js"
+    },
     "devDependencies": {
         "concurrently": "^6.4.0"
     }
