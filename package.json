@@ -2,7 +2,6 @@
     "name": "blogstack",
     "version": "0.1.0",
     "private": "false",
-    "type": "module",
     "dependencies": {
         "aws-sdk": "^2.1028.0",
         "bcryptjs": "^2.4.3",
