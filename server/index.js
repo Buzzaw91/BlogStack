@@ -1,11 +1,18 @@
 const express = require('express')
 const dotenv = require('dotenv').config()
+const { notFound, errorHandler } = require('./middleware/errorMiddleware.js')
+const userRoutes = require('./routes/userRoutes.js')
 
 
 
 const app = express();
 
 app.use(express.json());
+
+app.use('/api/v1/users', userRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
