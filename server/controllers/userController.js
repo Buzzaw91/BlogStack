@@ -13,6 +13,7 @@ const authUser = asyncHandler( async (req, res)=> {
     const { rows } = await db.query('SELECT * FROM users WHERE username = $1;', [username]);
 
     if (rows[0] && compareHash(password, rows[0].password_hash)) {
+        rows[0].password_hash = null;
         return res.status(200).json({...rows[0], token: generateToken(rows[0].id)});
     }   else {
         return res.status(400).json({
