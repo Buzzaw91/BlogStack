@@ -27,13 +27,16 @@ const getAllPosts = asyncHandler( async (req, res) => {
 const createPost = asyncHandler ( async (req, res) => {
 
     const { title, metaTitle, published, id, url, body } = req.body;
-    const slug = slugify(title);
-    // TODO: Implement check for publishing status, and send corresponding timestamp
+    let slug = slugify(title);
+    const counter = await db.query(`INSERT INTO counters (slug, counter) VALUES ($1, 0)
+    ON CONFLICT (slug)
+    DO UPDATE SET counter = counters.counter + 1 RETURNING counter;
+    `,[slug]);
+    counter.rows[0].counter > 0 ? slug = slug.concat('-', counter.rows[0].counter): null;
 
     const { rows } = await db.query(`INSERT INTO posts (slug, title, meta_title, published, url, user_id, body)
     VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *
     `,[slug, title, metaTitle, published, url, id, body]);
-
     if (rows[0]) {
         res.status(201).json({...rows[0]})
     } else {
