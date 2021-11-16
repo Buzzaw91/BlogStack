@@ -69,6 +69,10 @@ const registerUsers = asyncHandler( async (req, res) => {
 // @desc    Get user profile
 // @route   GET /api/v1/users/profile
 // @access Private
+const getUserProfile = asyncHandler( async (req, res) => {
+
+} )
+
 
 
 // @desc    Get all users
