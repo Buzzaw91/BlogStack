@@ -2,6 +2,28 @@ const asyncHandler = require('express-async-handler')
 const db = require('../db/index.js');
 const generateToken = require('../utils/generateToken.js')
 const bcrypt = require('bcryptjs')
+const compareHash = require('../utils/comparePassword')
+
+// @desc    Auth user & get token
+// @route   POST /api/v1/users/login
+// @access  Public
+const authUser = asyncHandler( async (req, res)=> {
+    const { username, password } = req.body;
+
+    const { rows } = await db.query('SELECT * FROM users WHERE username = $1;', [username]);
+
+    if (rows[0] && compareHash(password, rows[0].password_hash)) {
+        return res.status(200).json({...rows[0], token: generateToken(rows[0].id)});
+    }   else {
+        return res.status(400).json({
+            error: 'Invalid username of password'
+        })
+    }
+
+})
+
+
+
 
 // @desc    Register a new user
 // @route   POST /api/v1/users
@@ -15,7 +37,7 @@ const registerUsers = asyncHandler( async (req, res) => {
         avatar
     } = req.body;
 
-    const userExists = await db.query(`SELECT * FROM users WHERE username = $1 OR email = $2`, [username, email]);
+    const userExists = await db.query(`SELECT username, email FROM users WHERE username = $1 OR email = $2`, [username, email]);
 
     if (userExists.rowCount !== 0) {
         return res.status(400).json({
@@ -56,4 +78,4 @@ const getUsers = asyncHandler( async (req, res) => {
     res.json(rows);
 });
 
-module.exports = { getUsers, registerUsers }
+module.exports = { getUsers, registerUsers, authUser }
