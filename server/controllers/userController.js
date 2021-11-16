@@ -25,12 +25,12 @@ const registerUsers = asyncHandler( async (req, res) => {
         const hash = await bcrypt.hash(password, 10);
         const user = await db.query(`
         INSERT INTO users (username, bio, email, password_hash, avatar)
-        VALUES ($1, $2, $3, $4, $5) RETURNING username, bio, email, is_author, is_admin;
+        VALUES ($1, $2, $3, $4, $5) RETURNING id ,username, bio, email, is_author, is_admin;
         `, [username, bio, email, hash, avatar]);
 
         if (user.rowCount !== 0) {
             const { rows } = user;
-            return res.status(201).json(rows);
+            return res.status(201).json({...rows[0], token: generateToken(rows[0].id)});
         } else {
             return res.status(400).json({
                 error: 'Invalid user data'
@@ -42,6 +42,10 @@ const registerUsers = asyncHandler( async (req, res) => {
 
 
 })
+
+// @desc    Get user profile
+// @route   GET /api/v1/users/profile
+// @access Private
 
 
 // @desc    Get all users
