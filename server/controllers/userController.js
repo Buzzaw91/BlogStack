@@ -75,7 +75,7 @@ const registerUsers = asyncHandler( async (req, res) => {
 // @route   GET /api/v1/users
 // @access Private/admin
 const getUsers = asyncHandler( async (req, res) => {
-    const { rows } = await db.query('SELECT * FROM users;');
+    const { rows } = await db.query(`SELECT username, email, bio, avatar, created_at, updated_at, status, is_author, is_admin, last_login FROM users;`);
     res.json(rows);
 });
 
