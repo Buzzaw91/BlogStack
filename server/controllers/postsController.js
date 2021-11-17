@@ -43,4 +43,40 @@ const createPost = asyncHandler ( async (req, res) => {
 
 })
 
-module.exports = { getAllPosts, createPost }
+// @desc    Get all PUBLISHED post  by a user
+// @route   GET /api/v1/posts/:id
+// @access  Public
+
+const getPostsByUser = asyncHandler( async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const { rows } = await db.query('SELECT * FROM posts WHERE user_id = $1 AND published = true', [id]);
+        return res.status(200).json(rows);
+    } catch(err) {
+        console.log(err.stack);
+        res.status(500).json({error: 'Something went wrong on the server...'})
+    }
+
+
+})
+
+// @desc    Get single PUBLISHED post  by a user
+// @route   GET /api/v1/posts/:id
+// @access  Public
+
+const getPostByUser = asyncHandler( async (req, res) => {
+    const { slug } = req.params;
+
+    try {
+        const { rows } = await db.query('SELECT * FROM posts WHERE slug = $1', [slug]);
+        return res.status(200).json(rows);
+    } catch(err) {
+        console.log(err.stack);
+        res.status(500).json({error: 'Something went wrong on the server...'})
+    }
+
+
+})
+
+module.exports = { getAllPosts, createPost, getPostsByUser, getPostByUser }

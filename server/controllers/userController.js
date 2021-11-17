@@ -80,7 +80,7 @@ const getUserProfile = asyncHandler( async (req, res) => {
 // @access Private/admin
 const getUsers = asyncHandler( async (req, res) => {
     const { rows } = await db.query(`SELECT id, username, email, bio, avatar, created_at, updated_at, status, is_author, is_admin, last_login FROM users;`);
-    res.json(rows);
+    return res.json(rows);
 });
 
 module.exports = { getUsers, registerUsers, authUser }
