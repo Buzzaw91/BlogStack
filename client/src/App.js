@@ -1,10 +1,11 @@
-
+import { Route, Routes } from 'react-router-dom'
+import MobileNav from './components/MobileNav'
 
 function App() {
   return (
-    <div>
-      <h1>Blogstack</h1>
-    </div>
+    <>
+      <MobileNav />
+    </>
   );
 }
 
