@@ -1,12 +1,17 @@
 const express = require('express')
 const dotenv = require('dotenv').config()
+const helmet = require('helmet')
+const cors = require('cors')
 const { notFound, errorHandler } = require('./middleware/errorMiddleware.js')
 const userRoutes = require('./routes/userRoutes.js')
 const postRoutes = require('./routes/postRoutes.js')
 
 
 
+
 const app = express();
+app.use(helmet())
+app.use(cors())
 
 app.use(express.json());
 

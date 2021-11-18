@@ -14,7 +14,7 @@ const MobileNav = () => {
     return (
         <div className='container overflow-x-hidden'>
           <IconContext.Provider value={{ color: '#312E81' }}>
-        <div className='bg-indigo-200 h-20 flex justify-between items-center select-none'>
+        <div className='bg-indigo-100 h-20 flex justify-between items-center select-none'>
           <Link to='#' className='ml-8 text-3xl'>
             <FaIcons.FaBars onClick={showSidebar}/>
           </Link>
@@ -24,9 +24,9 @@ const MobileNav = () => {
           </Link>
         </div>
         </div>
-        <nav className={sidebar ? 'bg-indigo-200 w-64 h-screen flex justify-center fixed top-0 translate-x-0 transition transform duration-1500 ease-in-out' : 'bg-indigo-200 w-64 h-screen flex justify-center fixed top-0 -translate-x-full transition transform duration-1500 ease-in-out'}>
+        <nav className={sidebar ? 'bg-indigo-100 w-64 h-screen flex justify-center fixed top-0 translate-x-0 transition transform duration-500 ease-in-out' : 'bg-indigo-100 w-64 h-screen flex justify-center fixed top-0 -translate-x-full transition transform duration-500 ease-in-out'}>
           <ul className='w-screen' onClick={showSidebar}>
-            <li className='bg-indigo-200 w-full h-20 flex justify-start items-center ml-8 select-none'>
+            <li className='bg-indigo-100 w-full h-20 flex justify-start items-center ml-8 select-none'>
               <Link to='#' className='text-3xl'>
                 <AiIcons.AiOutlineClose />
               </Link>

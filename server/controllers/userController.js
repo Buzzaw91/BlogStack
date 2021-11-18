@@ -4,10 +4,10 @@ const generateToken = require('../utils/generateToken.js')
 const bcrypt = require('bcryptjs')
 const compareHash = require('../utils/comparePassword')
 
-// @desc    Auth user & get token
+// @desc    Login user & get token
 // @route   POST /api/v1/users/login
 // @access  Public
-const authUser = asyncHandler( async (req, res)=> {
+const loginUser = asyncHandler( async (req, res)=> {
     const { username, password } = req.body;
 
     const { rows } = await db.query('SELECT * FROM users WHERE username = $1;', [username]);
@@ -83,4 +83,4 @@ const getUsers = asyncHandler( async (req, res) => {
     return res.json(rows);
 });
 
-module.exports = { getUsers, registerUsers, authUser }
+module.exports = { getUsers, registerUsers, loginUser }
