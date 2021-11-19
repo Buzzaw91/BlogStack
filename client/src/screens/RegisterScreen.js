@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import axios from 'axios'
+import { register } from '../actions/userActions'
 
 const RegisterScreen = () => {
     const [username, setUsername] = useState('')
@@ -11,8 +13,28 @@ const RegisterScreen = () => {
     const [avatar, setAvatar] = useState(null)
     const [uploading, setUploading] = useState(false)
 
-    const path = 'http://192.168.43.151:5000/api/v1'
+    const userRegister = useSelector(state => state.userRegister)
+    const { loading, error, userInfo } = userRegister;
 
+    const dispatch = useDispatch()
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+      if (userInfo) {
+          navigate('/user')
+      } else {
+      }
+  }, [navigate, userInfo])
+
+    const submitHandler = (e) => {
+      e.preventDefault()
+      if (password !== passwordConfirm) {
+        alert('Passwords do not match')
+      } else {
+        dispatch(register(username, password, email, avatar))
+      }
+    }
 
     const uploadFileHandler = async (e) => {
 
@@ -27,7 +49,7 @@ const RegisterScreen = () => {
             }
         }
 
-        const { data } = await axios.post(`${path}/images`, formData, config)
+        const { data } = await axios.post(`/api/v1/images`, formData, config)
 
         setAvatar(data.imagePath);
         setUploading(false)
@@ -36,13 +58,6 @@ const RegisterScreen = () => {
         setUploading(false);
     }
 }
-
-
-
-    const submitHandler = (e) => {
-        e.preventDefault()
-
-    }
 
     return (
         <div className='h-screen bg-white flex justify-center items-start mt-24'>
