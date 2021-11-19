@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import MobileNav from './components/MobileNav'
+import ConditionalNav from './conditional/ConditionalNav'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
 import UserScreen from './screens/UserScreen'
@@ -7,7 +7,7 @@ import UserScreen from './screens/UserScreen'
 function App() {
   return (
     <>
-      <MobileNav />
+      <ConditionalNav />
         <Routes>
           <Route element={<UserScreen />} path='/user' />
           <Route element={<LoginScreen />} path='/login' />

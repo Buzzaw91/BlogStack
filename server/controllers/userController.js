@@ -48,7 +48,7 @@ const registerUsers = asyncHandler( async (req, res) => {
         const hash = await bcrypt.hash(password, 10);
         const user = await db.query(`
         INSERT INTO users (username, bio, email, password_hash, avatar)
-        VALUES ($1, $2, $3, $4, $5) RETURNING id ,username, bio, email, is_author, is_admin;
+        VALUES ($1, $2, $3, $4, $5) RETURNING id ,username, bio, avatar, email, is_author, is_admin, last_login;
         `, [username, bio, email, hash, avatar]);
 
         if (user.rowCount !== 0) {
