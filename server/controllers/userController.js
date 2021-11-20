@@ -83,4 +83,25 @@ const getUsers = asyncHandler( async (req, res) => {
     return res.json(rows);
 });
 
-module.exports = { getUsers, registerUsers, loginUser }
+// @desc    Get user & all published posts
+// @route   GET /api/v1/users/:user
+// @access Public
+const getUserPosts = asyncHandler( async (req, res) => {
+    try {
+        const { username } = req.params;
+        console.log(req.params)
+
+        const { rows } = await db.query(`SELECT username, bio, avatar, email, last_login, title, slug, url, body FROM users
+        INNER JOIN posts ON users.id = posts.user_id
+        WHERE published = true AND username = $1
+        ORDER BY posts.updated_at;`,[username])
+
+        return res.status(200).json(rows)
+
+    } catch(error) {
+        console.error(error)
+        return res.status(404).json({error})
+    }
+})
+
+module.exports = { getUsers, registerUsers, loginUser, getUserPosts }
