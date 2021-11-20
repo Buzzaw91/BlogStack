@@ -9,7 +9,7 @@ function App() {
     <>
       <ConditionalNav />
         <Routes>
-          <Route element={<UserScreen />} path='/user' />
+          <Route element={<UserScreen />} path='/:slug' />
           <Route element={<LoginScreen />} path='/login' />
           <Route element={<RegisterScreen />} path='/register' />
         </Routes>

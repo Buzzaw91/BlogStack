@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa'
 import { Menu } from '@headlessui/react'
@@ -7,14 +8,18 @@ import logo from '../images/logos/logo_transparent.png'
 
 const Navbar = () => {
 
+    const userLogin = useSelector(state => state.userLogin)
+    const { loading, error, userInfo } = userLogin;
+
+
     return (
         <div className='overflow-x-hidden overflow-y-visible min-w-full'>
             <div className='flex justify-between bg-white select-none h-48'>
                 <Link to='/' className='px-2 py-2'>
                     <img src={logo} alt='logo' height='100' width='100'/>
                 </Link>
-                    <Menu as='div' className='absolute right-1 px-4 py-2 pt-12 pr-4 mr-24 w-40 text-sm font-normal text-black bg-white rounded-md opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
-                        <Menu.Button className='font-medium'>Menu</Menu.Button>
+                    <Menu as='div' className='absolute right-1 px-4 py-2 pt-12 pr-4 mr-24 w-40 text-sm font-normal text-black bg-white rounded-md opacity-80'>
+                        <Menu.Button className='font-medium bg-blue-100 rounded-lg bg-opacity-50 hover:bg-opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 px-6 py-2'>{userInfo ? userInfo.username : 'Menu'}</Menu.Button>
                         <Menu.Items as='ul' className='py-4'>
                             <Menu.Item as='li' className='py-1 my-2'>
                                 {({ active }) => (

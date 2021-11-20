@@ -6,7 +6,10 @@ import {
     USER_LOGOUT,
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
-    USER_REGISTER_FAIL
+    USER_REGISTER_FAIL,
+    USER_POSTS_REQUEST,
+    USER_POSTS_SUCCESS,
+    USER_POSTS_FAIL
  }
 from '../constants/userConstants'
 
@@ -69,6 +72,33 @@ export const register = (username, password, email, avatar) => async (dispatch) 
     }   catch(error) {
         dispatch({
             type: USER_REGISTER_FAIL,
+            payload: error.response && error.response.data.message ?
+            error.response.data.message : error.message
+        })
+    }
+}
+
+export const info = (username) => async (dispatch) => {
+
+    try {
+        dispatch({
+            type: USER_POSTS_REQUEST
+        });
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+        const { data } = await axios.get(`/api/v1/users/${username}`, config)
+
+        dispatch({
+            type: USER_POSTS_SUCCESS,
+            payload: data
+        });
+
+    }   catch(error) {
+        dispatch({
+            type: USER_POSTS_FAIL,
             payload: error.response && error.response.data.message ?
             error.response.data.message : error.message
         })
