@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { info } from '../actions/userActions'
+import Loader from '../components/Loader';
+import Post from '../components/Post';
 
 const UserScreen = () => {
 
@@ -15,18 +17,21 @@ const UserScreen = () => {
 
 
         useEffect(() => {
-            if (!posts) {
+            if(!posts) {
                 dispatch(info(params.slug))
-
             }
+
         },[params, dispatch, posts])
         console.log(params)
         console.log(posts)
 
     return(
         <>
-        <div className='flex min-w-full bg-blue-100 min-h-screen justify-center'>
-            <h1 className='font-robotoSlab'>{posts[0].username || 'No user found'}</h1>
+        <div className='flex min-w-full bg-white min-h-screen flex-col justify-start  items-end'>
+            {loading && <Loader />}
+            {posts && posts.map((post) => (
+                 <Post title={post.title} url={post.url} body={post.body} />
+            ))}
         </div>
         </>
     )
