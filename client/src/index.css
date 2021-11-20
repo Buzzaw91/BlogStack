@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.gray-circle-1 {
+    animation-delay: 0.1s;
+}
+.gray-circle-2 {
+    animation-delay: 0.2s;
+}
+.gray-circle-2 {
+    animation-delay: 0.3s;
+}
