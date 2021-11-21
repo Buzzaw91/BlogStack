@@ -22,8 +22,7 @@ const UserScreen = () => {
             }
 
         },[params, dispatch, posts])
-        console.log(params)
-        console.log(posts)
+
 
     return(
         <>

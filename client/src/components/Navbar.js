@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { shallowEqual, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa'
 import { Menu } from '@headlessui/react'
@@ -8,8 +8,9 @@ import logo from '../images/logos/logo_transparent.png'
 
 const Navbar = () => {
 
-    const userLogin = useSelector(state => state.userLogin)
+    const  userLogin  = useSelector(state => state.userLogin, shallowEqual)
     const { loading, error, userInfo } = userLogin;
+
 
 
     return (
