@@ -13,7 +13,7 @@ const LoginScreen = () => {
     let navigate = useNavigate()
 
     const userLogin = useSelector(state => state.userLogin)
-    const { loading, error, userInfo } = userLogin;
+    const { error, userInfo } = userLogin
 
 
     useEffect(() => {

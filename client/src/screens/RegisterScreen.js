@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { register } from '../actions/userActions'
 import useStateWithValidation from '../hooks/useStateWithValidation'
@@ -26,7 +25,6 @@ const RegisterScreen = () => {
     useEffect(() => {
       if (userInfo) {
           navigate('/user')
-      } else {
       }
   }, [navigate, userInfo])
 
