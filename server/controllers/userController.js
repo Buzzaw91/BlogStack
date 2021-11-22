@@ -109,7 +109,7 @@ const getUserPosts = asyncHandler( async (req, res) => {
 // @access  Public
 const getFeaturedUsers = asyncHandler( async (req, res) => {
     try {
-        const { rows } = await db.query(`SELECT username, description, avatar, FROM users WHERE is_author = true LIMIT 5;`)
+        const { rows } = await db.query(`SELECT username, description, avatar FROM users WHERE is_author = true LIMIT 5;`)
         return res.status(200).json(rows)
 
     }   catch(error) {
