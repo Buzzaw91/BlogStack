@@ -1,9 +1,7 @@
-import React from 'react';
-import axios from 'axios'
+import React from 'react'
 
 
 const Post = ({title, url, body}) => {
-    console.log('url: ',url)
 
     return (
         <div className='container mx-auto flex-col justify-center items-center my-4 border max-w-xl'>
