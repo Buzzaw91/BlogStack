@@ -37,6 +37,7 @@ const registerUsers = asyncHandler( async (req, res) => {
         email,
         avatar
     } = req.body;
+    console.log('userController -----> ', avatar)
 
     const userExists = await db.query(`SELECT username, email FROM users WHERE username = $1 OR email = $2`, [username, email]);
 

@@ -5,6 +5,7 @@ import axios from 'axios'
 import { register } from '../actions/userActions'
 import useStateWithValidation from '../hooks/useStateWithValidation'
 import Error from '../components/Error'
+import Loader from '../components/Loader'
 
 const RegisterScreen = () => {
     const [username, setUsername, userIsValid] = useStateWithValidation( name => name.length > 5, '')
@@ -16,7 +17,7 @@ const RegisterScreen = () => {
     const [showError, setShowError] = useState(false)
 
     const userRegister = useSelector(state => state.userRegister)
-    const { loading, error, userInfo } = userRegister;
+    const { error, userInfo } = userRegister;
 
     const dispatch = useDispatch()
 
@@ -24,7 +25,7 @@ const RegisterScreen = () => {
 
     useEffect(() => {
       if (userInfo) {
-          navigate('/user')
+          navigate(`/${userInfo.username}`)
       }
   }, [navigate, userInfo])
 
@@ -56,7 +57,7 @@ const RegisterScreen = () => {
 
         const { data } = await axios.post(`/api/v1/images`, formData, config)
 
-        setAvatar(data.imagePath);
+        setAvatar(data);
         setUploading(false)
     } catch (error) {
         console.error(error);
@@ -81,11 +82,11 @@ const RegisterScreen = () => {
           {showError && !confirmIsValid && <Error />}
           <input className='text-gray-700 shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline' type='password' onChange={(e) => setPasswordConfirm(e.target.value)}></input>
           <label className='text-gray-700 font-bold py-2'>Avatar</label>
-          <input className='text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3' type='file' alt='avatar' onChange={uploadFileHandler}></input>
+          <input className='text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-2 px-3 mb-3' type='file' alt='avatar' onChange={uploadFileHandler}></input>
           <div className='flex justify-between items-center my-4'>
-            <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4' type='submit'>
+            {uploading ? <Loader /> : <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4' type='submit'>
               Sign Up
-            </button>
+            </button>}
             <Link className='text-blue-500 hover:text-blue-700 font-bold' to='/login'>
               Sign In
             </Link>

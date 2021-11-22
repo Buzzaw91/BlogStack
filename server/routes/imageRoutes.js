@@ -23,7 +23,7 @@ router.route('/').post(upload.single('image'), async (req, res) => {
     await unlinkFile(file.path)
 
     const description = req.body.description
-    console.log(result.Location)
+    console.log('imageRoutes ------> ',result.Location)
     res.send(result.Location)
 })
 

@@ -7,6 +7,7 @@ import {
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
     USER_REGISTER_FAIL,
+    USER_REGISTER_RESET,
     USER_POSTS_REQUEST,
     USER_POSTS_SUCCESS,
     USER_POSTS_FAIL,
@@ -52,6 +53,7 @@ export const login = (username, password) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
     localStorage.removeItem('userInfo')
     dispatch({type: USER_LOGOUT})
+    dispatch({type: USER_REGISTER_RESET})
 }
 
 export const register = (username, password, email, avatar) => async (dispatch) => {
