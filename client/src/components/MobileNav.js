@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { logout } from '../actions/userActions'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import { IconContext } from 'react-icons'
@@ -7,9 +9,15 @@ import { SidebarData } from './SidebarData'
 
 
 const MobileNav = () => {
+  const dispatch = useDispatch()
+
     const [sidebar, setSidebar] = useState(false)
 
     const showSidebar = () => setSidebar(!sidebar)
+
+    const logoutHandler = () => {
+      dispatch(logout())
+    }
 
     return (
         <div className='container overflow-x-hidden'>

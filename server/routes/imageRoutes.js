@@ -15,26 +15,24 @@ const router = express.Router()
 
 router.route('/').post(upload.single('image'), async (req, res) => {
     const file = req.file
-    console.log(file)
 
     // Apply filter
     // Resize
 
     const result = await uploadFile(file)
-    console.log('Before unlinkFile: ', result)
     await unlinkFile(file.path)
-    console.log('After unlinkFile: ', result)
 
     const description = req.body.description
-    console.log({imagePath: `/images/${result.Key}`})
-    res.send({imagePath: `/images/${result.Key}`})
+    console.log(result.Location)
+    res.send(result.Location)
 })
 
 router.route('/:key').get((req, res) => {
+    console.log(req.params)
     const key = req.params.key
     const readstream = getFileStream(key)
 
-    readstream.pipe(res)
+    res.send(key)
 })
 
 module.exports = router

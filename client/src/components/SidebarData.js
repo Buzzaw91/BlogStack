@@ -1,37 +1,20 @@
-import React from 'react';
-import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
-import * as IoIcons from 'react-icons/io';
+import React from 'react'
+import * as FaIcons from 'react-icons/fa'
 
 export const SidebarData = [
   {
+    path: '/profile',
+    icon: <FaIcons.FaHome />,
+    cName: 'py-4 px-4 ml-4 select-none text-2xl'
+  },
+  {
+    path: '/posts',
+    icon: <FaIcons.FaListAlt />,
+    cName: 'py-4 px-4 ml-4 select-none text-2xl'
+  },
+  {
     path: '/',
-    icon: <AiIcons.AiFillHome />,
-    cName: 'py-4 px-4 ml-4 select-none text-2xl'
-  },
-  {
-    path: '/reports',
-    icon: <IoIcons.IoIosPaper />,
-    cName: 'py-4 px-4 ml-4 select-none text-2xl'
-  },
-  {
-    path: '/products',
-    icon: <FaIcons.FaCartPlus />,
-    cName: 'py-4 px-4 ml-4 select-none text-2xl'
-  },
-  {
-    path: '/team',
-    icon: <IoIcons.IoMdPeople />,
-    cName: 'py-4 px-4 ml-4 select-none text-2xl'
-  },
-  {
-    path: '/messages',
-    icon: <FaIcons.FaEnvelopeOpenText />,
-    cName: 'py-4 px-4 ml-4 select-none text-2xl'
-  },
-  {
-    path: '/support',
-    icon: <IoIcons.IoMdHelpCircle />,
+    icon: <FaIcons.FaPowerOff />,
     cName: 'py-4 px-4 ml-4 select-none text-2xl'
   }
 ];

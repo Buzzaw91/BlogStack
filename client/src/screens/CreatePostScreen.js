@@ -6,6 +6,7 @@ import axios from 'axios'
 import Loader from '../components/Loader'
 import Error from '../components/Error'
 
+
 const CreatePostScreen = () => {
     const [title, setTitle] = useState('')
     const [url, setUrl] = useState('')
@@ -28,7 +29,7 @@ const CreatePostScreen = () => {
             navigate('/login')
         }
         if (success === true) {
-            navigate('/user')
+            navigate(`/${userInfo.username}`)
         }
     },[userInfo, navigate, success, createdPost])
 
@@ -45,7 +46,7 @@ const CreatePostScreen = () => {
               }
           }
           const { data } = await axios.post(`/api/v1/images`, formData, config)
-          setUrl(data.imagePath);
+          setUrl(data);
           setUploading(false)
       } catch (error) {
           console.error(error);
@@ -77,12 +78,11 @@ const CreatePostScreen = () => {
           <label className='text-gray-700 font-bold py-2'>Title Image</label>
           <input className='text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-4 px-3 mb-3' type='file' alt='avatar' onChange={uploadFileHandler}></input>
           <div className='flex justify-between items-center my-4'>
-            <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4' type='submit'>
+              {uploading ? <Loader /> : <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4' type='submit'>
               Create Post
-            </button>
+            </button>}
           </div>
         </form>}
-        
     </div>
     </>
     )

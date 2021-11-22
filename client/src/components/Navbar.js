@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import { shallowEqual, useSelector } from 'react-redux'
+import React from 'react'
+import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa'
 import { Menu } from '@headlessui/react'
+import { logout } from '../actions/userActions'
 import logo from '../images/logos/logo_transparent.png'
 
 
 const Navbar = () => {
+    const dispatch = useDispatch()
 
     const  userLogin  = useSelector(state => state.userLogin, shallowEqual)
-    const { loading, error, userInfo } = userLogin;
+    const { userInfo } = userLogin;
 
-
-
+    const logoutHandler = () => {
+        dispatch(logout())
+    }
     return (
         <div className='overflow-x-hidden overflow-y-visible min-w-full'>
             <div className='flex justify-between bg-white select-none h-48'>
@@ -38,7 +41,7 @@ const Navbar = () => {
                             </Menu.Item>
                             <Menu.Item as='li' className='py-1 my-2'>
                                 {({ active }) => (
-                                    <Link to='/' className={`${active && 'bg-blue-100 rounded py-2 px-2 bg-opacity-50'}`}>
+                                    <Link to='/' className={`${active && 'bg-blue-100 rounded py-2 px-2 bg-opacity-50'}`} onClick={logoutHandler}>
                                         <FaIcons.FaPowerOff className='inline-block mr-4 mb-1' />Logout
                                     </Link>
                                 )}

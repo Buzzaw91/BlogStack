@@ -16,10 +16,10 @@ const UserScreen = () => {
 
 
 
+
         useEffect(() => {
             if(!posts) {
-                dispatch(info(params.slug))
-            }
+                dispatch(info(params.slug))}
 
         },[params, dispatch, posts])
 
