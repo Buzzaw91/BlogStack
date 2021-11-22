@@ -12,7 +12,7 @@ const UserScreen = () => {
 
 
     const userPosts = useSelector(state => state.userPosts);
-    const { loading, error, posts } = userPosts;
+    const { loading, posts } = userPosts;
 
 
 

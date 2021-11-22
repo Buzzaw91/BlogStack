@@ -8,7 +8,10 @@ import {
     USER_REGISTER_FAIL,
     USER_POSTS_REQUEST,
     USER_POSTS_SUCCESS,
-    USER_POSTS_FAIL
+    USER_POSTS_FAIL,
+    USER_FEATURED_REQUEST,
+    USER_FEATURED_SUCCESS,
+    USER_FEATURED_FAIL
 } from '../constants/userConstants'
 
 export const userLoginReducer = (state = {}, action) => {
@@ -46,6 +49,19 @@ export const userPostsReducer = (state = { posts:[] }, action) => {
         case USER_POSTS_SUCCESS:
             return { posts: action.payload }
         case USER_POSTS_FAIL:
+            return { loading: false, error: action.payload }
+        default:
+            return state
+    }
+}
+
+export const userFeatReducer = (state = { featured:[] }, action) => {
+    switch(action.type) {
+        case USER_FEATURED_REQUEST:
+            return { loading: true }
+        case USER_FEATURED_SUCCESS:
+            return { featured: action.payload }
+        case USER_FEATURED_FAIL:
             return { loading: false, error: action.payload }
         default:
             return state
