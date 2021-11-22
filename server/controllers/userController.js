@@ -104,4 +104,18 @@ const getUserPosts = asyncHandler( async (req, res) => {
     }
 })
 
-module.exports = { getUsers, registerUsers, loginUser, getUserPosts }
+// @desc    Get featured users (at this point just arbitrary few, later based on likes on posts etc...)
+// @route   GET /api/v1/users
+// @access  Public
+const getFeaturedUsers = asyncHandler( async (req, res) => {
+    try {
+        const { rows } = await db.query(`SELECT username, description, avatar, FROM users WHERE is_author = true LIMIT 5;`)
+        return res.status(200).json(rows)
+
+    }   catch(error) {
+        console.error(error)
+        return res.status(404).json({error})
+    }
+})
+
+module.exports = { getUsers, registerUsers, loginUser, getUserPosts, getFeaturedUsers }
