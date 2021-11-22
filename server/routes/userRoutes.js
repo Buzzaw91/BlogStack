@@ -5,7 +5,9 @@ const { protect } = require('../middleware/authMiddleware')
 const router = express.Router()
 
 // ROUTES UNPROTECTED AT THE MOMENT
-router.route('/').get(getFeaturedUsers).post(registerUsers)
+router.route('/').post(registerUsers)
+
+router.route('/feat').get(getFeaturedUsers)
 
 router.route('/:username').get(getUserPosts)
 
