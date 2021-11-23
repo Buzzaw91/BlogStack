@@ -70,7 +70,7 @@ const getPostByUser = asyncHandler( async (req, res) => {
     const { slug } = req.params;
 
     try {
-        const { rows } = await db.query('SELECT * FROM posts WHERE slug = $1', [slug]);
+        const { rows } = await db.query('SELECT title, slug, meta_title, published, posts.created_at, posts.updated_at, published_at, url, body, sub_title, username FROM posts JOIN users ON posts.user_id = users.id WHERE slug = $1', [slug]);
         const result = toCamelCase(rows)
         return res.status(200).json(result[0]);
     } catch(err) {
