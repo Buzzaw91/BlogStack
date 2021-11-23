@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { info } from '../actions/userActions'
 import Loader from '../components/Loader';
 import Post from '../components/Post';
+import  isEmpty  from 'lodash.isempty';
 
 const UserScreen = () => {
 
@@ -18,10 +19,8 @@ const UserScreen = () => {
 
 
         useEffect(() => {
-            if(!posts) {
-                dispatch(info(params.slug))}
-
-        },[params, dispatch, posts])
+                dispatch(info(params.slug))
+        },[])
 
 
     return(

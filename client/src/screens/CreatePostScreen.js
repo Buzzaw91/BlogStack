@@ -22,16 +22,16 @@ const CreatePostScreen = () => {
     const { id } = userInfo
 
     const createdPost = useSelector(state => state.createdPost)
-    const { success, error, loading } = createdPost
+    const { error, loading, post } = createdPost
 
     useEffect(() => {
         if (!userInfo) {
             navigate('/login')
         }
-        if (success === true) {
+        if (post) {
             navigate(`/${userInfo.username}`)
         }
-    },[userInfo, navigate, success, createdPost])
+    },[userInfo, navigate, post])
 
     const uploadFileHandler = async (e) => {
 
