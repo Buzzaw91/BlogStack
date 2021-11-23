@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler')
 const slugify = require('slugify')
 const db = require('../db/index.js');
 const { counter } = require('../utils/slugCounter')
+const toCamelCase = require('../utils/camelCaser')
 
 // @desc    Get all posts
 // @route   GET /api/v1/posts
@@ -70,7 +71,8 @@ const getPostByUser = asyncHandler( async (req, res) => {
 
     try {
         const { rows } = await db.query('SELECT * FROM posts WHERE slug = $1', [slug]);
-        return res.status(200).json(rows);
+        const result = toCamelCase(rows)
+        return res.status(200).json(result[0]);
     } catch(err) {
         console.log(err.stack);
         res.status(500).json({error: 'Something went wrong on the server...'})
