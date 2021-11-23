@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { info } from '../actions/userActions'
 import Loader from '../components/Loader';
@@ -19,16 +19,18 @@ const UserScreen = () => {
 
 
         useEffect(() => {
-                dispatch(info(params.slug))
+                dispatch(info(params.user))
         },[])
-
+        console.log(params)
 
     return(
         <>
-        <div className='flex min-w-full bg-white min-h-screen flex-col justify-start  items-end'>
+        <div className='flex min-w-full bg-white min-h-screen flex-col items-center'>
             {loading && <Loader />}
             {posts && posts.map((post) => (
-                 <Post title={post.title} url={post.url} body={post.body} />
+                <Link to={`/${params.user}/${post.slug}`}>
+                    <Post title={post.title} url={post.url} body={post.body} />
+                </Link>
             ))}
         </div>
         </>
