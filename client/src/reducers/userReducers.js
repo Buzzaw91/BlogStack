@@ -58,12 +58,12 @@ export const userPostsReducer = (state = { posts:[] }, action) => {
     }
 }
 
-export const userFeatReducer = (state = { feat: [] }, action) => {
+export const userFeatReducer = (state = { users: [] }, action) => {
     switch(action.type) {
         case USER_FEATURED_REQUEST:
             return { loading: true }
         case USER_FEATURED_SUCCESS:
-            return { feat: action.payload, loading: false }
+            return { users: action.payload, loading: false }
         case USER_FEATURED_FAIL:
             return { loading: false, error: action.payload }
         default:
