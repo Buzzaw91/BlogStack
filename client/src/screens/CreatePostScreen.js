@@ -5,10 +5,12 @@ import { createPost } from '../actions/postActions'
 import axios from 'axios'
 import Loader from '../components/Loader'
 import Error from '../components/Error'
+import { CREATE_POST_RESET } from '../constants/postConstants'
 
 
 const CreatePostScreen = () => {
     const [title, setTitle] = useState('')
+    const [subTitle, setSubTitle] = useState('')
     const [url, setUrl] = useState('')
     const [body, setBody] = useState('')
     const [published, setPublished] = useState(false)
@@ -29,9 +31,10 @@ const CreatePostScreen = () => {
             navigate('/login')
         }
         if (post) {
+            dispatch({type: CREATE_POST_RESET})
             navigate(`/${userInfo.username}`)
         }
-    },[userInfo, navigate, post])
+    },[userInfo, navigate, post, dispatch])
 
     const uploadFileHandler = async (e) => {
 
@@ -59,7 +62,7 @@ const CreatePostScreen = () => {
       if ((title.length || body.length) === 0) {
           alert('A post title and content cannot be empty')
       } else {
-          dispatch(createPost({id ,title, url, body, published}))
+          dispatch(createPost({id ,title, url, body, published, subTitle}))
       }
   }
 
@@ -68,11 +71,13 @@ const CreatePostScreen = () => {
         <h1 className='text-4xl font-robotoSlab flex justify-center'>Create New Post</h1>
         <div className='h-screen bg-white flex justify-center items-start mt-24'>
             {error && <Error error={error} />}
-            {loading ? <Loader /> : <form className='w-full max-w-lg bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg' onSubmit={submitHandler}>
+            {loading ? <Loader /> : <form className='w-full max-w-lg bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg' onSubmit={submitHandler} onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}>
           <label className='text-gray-700 font-bold py-2'>Title</label>
           <input className='text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3' type='text' onChange={(e) => setTitle(e.target.value)}></input>
+          <label className='text-gray-700 font-bold py-2'>Sub Title</label>
+          <input className='text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3' type='text' onChange={(e) => setSubTitle(e.target.value)}></input>
           <label className='text-gray-700 font-bold py-2'>Text</label>
-          <input className='text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-12 px-3 mb-3' type='text' onChange={(e) => setBody(e.target.value)}></input>
+          <input className='text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-8 px-3 mb-3' type='text' onChange={(e) => setBody(e.target.value)}></input>
           <label className='text-gray-700 font-bold py-2'>Public</label>
           <input className='text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3' type='checkbox'  onClick={() => setPublished(!published)}></input>
           <label className='text-gray-700 font-bold py-2'>Title Image</label>

@@ -42,7 +42,7 @@ const Navbar = () => {
                             </Menu.Item>
                             <Menu.Item as='li' className='py-1 my-2'>
                                 {({ active }) => (
-                                    <Link to='/posts' className={`${active && 'bg-blue-100 rounded py-2 px-2 bg-opacity-50'}`}>
+                                    <Link to={`/${userInfo.username}`} className={`${active && 'bg-blue-100 rounded py-2 px-2 bg-opacity-50'}`}>
                                         <FaIcons.FaListAlt className='inline-block mr-4 mb-1' />My Posts
                                     </Link>
                                 )}
@@ -56,7 +56,6 @@ const Navbar = () => {
                             </Menu.Item>
                         </Menu.Items>
                     </Menu>}
-                    
             </div>
         </div>
     )

@@ -21,7 +21,7 @@ const UserScreen = () => {
         useEffect(() => {
                 dispatch(info(params.user))
         },[])
-        console.log(params)
+
 
     return(
         <>

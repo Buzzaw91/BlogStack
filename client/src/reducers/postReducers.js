@@ -2,6 +2,7 @@ import {
     CREATE_POST_REQUEST,
     CREATE_POST_SUCCESS,
     CREATE_POST_FAIL,
+    CREATE_POST_RESET,
     GET_POST_REQUEST,
     GET_POST_SUCCESS,
     GET_POST_FAIL
@@ -18,6 +19,8 @@ export const postCreateReducer = (state = {}, action) => {
                     post: action.payload }
         case CREATE_POST_FAIL:
             return { loading: false, error: action.payload }
+        case CREATE_POST_RESET:
+            return { }
         default:
             return state
     }
