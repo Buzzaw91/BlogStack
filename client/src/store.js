@@ -2,14 +2,15 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { userLoginReducer, userRegisterReducer, userPostsReducer, userFeatReducer } from './reducers/userReducers';
-import { postCreateReducer } from './reducers/postReducers'
+import { postCreateReducer, getPostReducer } from './reducers/postReducers'
 
 const reducer = combineReducers({
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
     userPosts: userPostsReducer,
     createdPost: postCreateReducer,
-    featuredUsers: userFeatReducer
+    featuredUsers: userFeatReducer,
+    singlePost: getPostReducer
 });
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(
