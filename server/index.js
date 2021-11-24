@@ -7,6 +7,7 @@ const { notFound, errorHandler } = require('./middleware/errorMiddleware.js')
 const userRoutes = require('./routes/userRoutes.js')
 const postRoutes = require('./routes/postRoutes.js')
 const imageRoutes = require('./routes/imageRoutes.js')
+const { resolve } = require('path')
 
 
 
@@ -32,9 +33,9 @@ app.use(errorHandler)
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.resolve(process.cwd() , '/app','/build')))
+    app.use(express.static(path.resolve(process.cwd(), '/app', '/client', '/build')))
 
-    app.get('*', (req, res) => res.sendFile(path.resolve(process.cwd() ,'/app', '/build' , 'index.html')))
+    app.get('*', (req, res) => res.sendFile(path.resolve(process.cwd() ,'/app', '/client' , '/build','index.html')))
 } else {
     app.get('/', (req, res) => {
         res.send('API is running...');
@@ -42,8 +43,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 // console.log(`path.relative(__dirname, '/app/build/index.html')`, path.relative(__dirname, '/app/build/index.html'))
 // console.log(`path.resolve('/app', 'build', 'index.html'))`, path.resolve('/app', 'build', 'index.html'))
-console.log(path.resolve(process.cwd() , '/app','/build'))
-console.log(path.resolve(process.cwd() ,'/app', '/build' , 'index.html'))
+console.log(path.resolve(process.cwd(), '/app', '/client', '/build'))
+console.log(path.resolve(process.cwd() ,'/app', '/client' , '/build','index.html'))
 
 
 
