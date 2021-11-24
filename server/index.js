@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 console.log(buildPath)
 console.log(path.resolve(buildPath, 'index.html'))
-console.log(process.NODE_ENV)
+console.log(process.env.NODE_ENV)
 
 
 
