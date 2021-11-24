@@ -40,8 +40,10 @@ if (process.env.NODE_ENV === 'production') {
         res.send('API is running...');
     });
 }
-console.log(`path.relative(__dirname, '/app/build/index.html')`, path.relative(__dirname, '/app/build/index.html'))
-console.log(`path.resolve('/app', 'build', 'index.html'))`, path.resolve('/app', 'build', 'index.html'))
+// console.log(`path.relative(__dirname, '/app/build/index.html')`, path.relative(__dirname, '/app/build/index.html'))
+// console.log(`path.resolve('/app', 'build', 'index.html'))`, path.resolve('/app', 'build', 'index.html'))
+console.log(process.cwd())
+
 
 
 
