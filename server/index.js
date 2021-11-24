@@ -40,7 +40,9 @@ if (process.env.NODE_ENV === 'production') {
         res.send('API is running...');
     });
 }
-console.log('__dirname', __dirname)
+console.log(`path.join(__dirname, /frontend/build)`, path.join(__dirname, '/frontend/build'))
+console.log(`path.resolve(__dirname, 'frontend', 'build', 'index.html'))`, path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+
 
 
 
