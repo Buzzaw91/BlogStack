@@ -44,6 +44,7 @@ if (process.env.NODE_ENV === 'production') {
 // console.log(`path.relative(__dirname, '/app/build/index.html')`, path.relative(__dirname, '/app/build/index.html'))
 // console.log(`path.resolve('/app', 'build', 'index.html'))`, path.resolve('/app', 'build', 'index.html'))
 console.log(path.join(process.cwd(), '/client/build'))
+console.log(path.resolve(process.cwd() ,'/app', '/client' , '/build','index.html'))
 
 
 
