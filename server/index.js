@@ -40,6 +40,7 @@ if (process.env.NODE_ENV === 'production') {
         res.send('API is running...');
     });
 }
+console.log('path', path)
 console.log(`path.join(/app/build)`, path.join('/app/build'))
 console.log(`path.resolve('/app', 'build', 'index.html'))`, path.resolve('/app', 'build', 'index.html'))
 
