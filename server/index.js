@@ -40,6 +40,7 @@ if (process.env.NODE_ENV === 'production') {
         res.send('API is running...');
     });
 }
+console.log('__dirname', __dirname)
 
 
 
