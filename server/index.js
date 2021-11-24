@@ -36,7 +36,9 @@ let buildPath
 if (process.env.NODE_ENV === 'production') {
     buildPath = path.join(process.cwd(), 'client/build')
 
-    app.use(express.static(buildPath))
+    app.use(express.static(buildPath), ((err)  => {
+        console.error(err)
+    }))
 
     app.get('*', (req, res) => res.sendFile(path.resolve(buildPath, 'index.html')))
 } else {
