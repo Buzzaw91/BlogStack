@@ -7,7 +7,7 @@ const { notFound, errorHandler } = require('./middleware/errorMiddleware.js')
 const userRoutes = require('./routes/userRoutes.js')
 const postRoutes = require('./routes/postRoutes.js')
 const imageRoutes = require('./routes/imageRoutes.js')
-const { resolve } = require('path')
+
 
 
 
@@ -33,11 +33,13 @@ app.use(errorHandler)
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 if (process.env.NODE_ENV === 'production') {
+
     app.use(express.static(path.join(process.cwd(), '/client/build')))
 
     app.get('*', (req, res) => res.sendFile(path.join(process.cwd(), '/client/build/index.html')))
+
 } else {
-    app.get('/', (req, res) => {
+    app.get('/api/v1/', (req, res) => {
         res.send('API is running...');
     });
 }
