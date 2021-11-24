@@ -36,7 +36,7 @@ let buildPath
 if (process.env.NODE_ENV === 'production') {
     buildPath = path.join(process.cwd(), 'client/build')
 
-    app.use('/', express.static(buildPath), ((err)  => {
+    app.use('/static', express.static(buildPath), ((err)  => {
         console.error(err)
     }))
 
