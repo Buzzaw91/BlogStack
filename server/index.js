@@ -32,9 +32,9 @@ app.use(errorHandler)
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join('client', '/frontend/build')))
+    app.use(express.static(path.join('client', '/build')))
 
-    app.get('*', (req, res) => res.sendFile(path.resolve('client', 'frontend', 'build', 'index.html')))
+    app.get('*', (req, res) => res.sendFile(path.resolve('client', 'build', 'index.html')))
 } else {
     app.get('/', (req, res) => {
         res.send('API is running...');
