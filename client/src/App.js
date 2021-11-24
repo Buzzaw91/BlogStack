@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, BrowserRouter } from 'react-router-dom'
 import ConditionalNav from './conditional/ConditionalNav'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
@@ -10,6 +10,7 @@ import PostScreen from './screens/PostScreen'
 function App() {
   return (
     <>
+    <BrowserRouter>
       <ConditionalNav />
         <Routes>
           <Route element={<HomeScreen />} path='/' />
@@ -19,6 +20,7 @@ function App() {
           <Route element={<CreatePostScreen />} path='/create' />
           <Route element={<PostScreen />} path='/:user/:slug' />
         </Routes>
+      </BrowserRouter>
     </>
   );
 }
