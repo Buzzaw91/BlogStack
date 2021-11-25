@@ -9,11 +9,6 @@ const postRoutes = require('./routes/postRoutes.js')
 const imageRoutes = require('./routes/imageRoutes.js')
 
 
-
-
-
-
-
 const app = express()
 app.use(helmet())
 app.use(cors())
@@ -41,14 +36,12 @@ if (process.env.NODE_ENV === 'production') {
     }))
 
     app.get('*', (req, res) => res.sendFile(path.resolve(buildPath, 'index.html')))
+
 } else {
-    app.get('/', (req, res) => {
+    app.get('/api/v1/', (req, res) => {
         res.send('API is running...');
     });
 }
-
-
-
 
 
 const PORT = process.env.PORT || 5000
