@@ -46,9 +46,7 @@ if (process.env.NODE_ENV === 'production') {
         res.send('API is running...');
     });
 }
-console.log(buildPath)
-console.log(path.resolve(buildPath, 'index.html'))
-console.log(process.env.NODE_ENV)
+
 
 
 
