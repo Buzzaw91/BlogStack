@@ -31,11 +31,15 @@ let buildPath
 if (process.env.NODE_ENV === 'production') {
     buildPath = path.join(process.cwd(), 'client/build')
 
-    app.use('/static', express.static(buildPath), ((err)  => {
+    app.use('/', express.static(buildPath), ((err)  => {
         console.error(err)
     }))
 
-    app.get('*', (req, res) => res.sendFile(path.resolve(buildPath, 'index.html')))
+    app.get('/*', (req, res) => res.sendFile(path.join(buildPath, 'client/build/index.html'), function(err) {
+        if (err) {
+            res.status(500).json({error:err})
+        }
+    }))
 
 } else {
     app.get('/api/v1/', (req, res) => {
