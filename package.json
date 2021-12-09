@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": "false",
     "dependencies": {
+        "autoprefixer": "^9.8.6",
         "aws-sdk": "^2.1028.0",
         "bcryptjs": "^2.4.3",
         "cors": "^2.8.5",
