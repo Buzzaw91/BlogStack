@@ -12,7 +12,10 @@ import {
     USER_POSTS_FAIL,
     USER_FEATURED_REQUEST,
     USER_FEATURED_SUCCESS,
-    USER_FEATURED_FAIL
+    USER_FEATURED_FAIL,
+    USER_DETAILS_REQUEST,
+    USER_DETAILS_SUCCESS,
+    USER_DETAILS_FAIL
 } from '../constants/userConstants'
 
 export const userLoginReducer = (state = {}, action) => {
@@ -65,6 +68,19 @@ export const userFeatReducer = (state = { users: [] }, action) => {
         case USER_FEATURED_SUCCESS:
             return { users: action.payload, loading: false }
         case USER_FEATURED_FAIL:
+            return { loading: false, error: action.payload }
+        default:
+            return state
+    }
+}
+
+export const userDetailsReducer = (state = {}, action) => {
+    switch(action.type) {
+        case USER_DETAILS_REQUEST:
+            return { loading: true }
+        case USER_DETAILS_SUCCESS:
+            return { userDetails: action.payload, loading: false }
+        case USER_DETAILS_FAIL:
             return { loading: false, error: action.payload }
         default:
             return state

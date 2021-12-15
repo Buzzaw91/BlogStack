@@ -14,7 +14,7 @@ const Navbar = () => {
 
 
     const  userLogin  = useSelector(state => state.userLogin, shallowEqual)
-    const { userInfo, loading } = userLogin;
+    const { userInfo } = userLogin;
     const path = userInfo ? '/create': '/login'
 
     const logoutHandler = () => {
