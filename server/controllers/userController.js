@@ -71,6 +71,20 @@ const registerUsers = asyncHandler( async (req, res) => {
 // @route   GET /api/v1/users/profile
 // @access Private
 const getUserProfile = asyncHandler( async (req, res) => {
+    try {
+        const { id } = req.params;
+        console.log(id)
+        console.log(req.params)
+        const { rows } = await db.query(`SELECT id, username, bio, avatar, email, is_author, is_admin, last_login, description, blog_name FROM users WHERE id = $1;`,
+        [id])
+
+        const result = toCamelCase(rows)
+
+        return res.status(200).json(result)
+    } catch(error) {
+        console.error(error)
+        return res.status(400).json({error})
+    }
 
 } )
 
@@ -90,8 +104,6 @@ const getUsers = asyncHandler( async (req, res) => {
 const getUserPosts = asyncHandler( async (req, res) => {
     try {
         const { username } = req.params;
-        console.log(req.params)
-
         const { rows } = await db.query(`SELECT username, bio, avatar, email, last_login, title, slug, url, body FROM users
         INNER JOIN posts ON users.id = posts.user_id
         WHERE published = true AND username = $1
@@ -119,4 +131,4 @@ const getFeaturedUsers = asyncHandler( async (req, res) => {
     }
 })
 
-module.exports = { getUsers, registerUsers, loginUser, getUserPosts, getFeaturedUsers }
+module.exports = { getUsers, registerUsers, loginUser, getUserPosts, getFeaturedUsers, getUserProfile }
