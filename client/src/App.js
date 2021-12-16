@@ -6,6 +6,7 @@ import UserScreen from './screens/UserScreen'
 import CreatePostScreen from './screens/CreatePostScreen'
 import HomeScreen from './screens/HomeScreen'
 import PostScreen from './screens/PostScreen'
+import ProfileScreen from './screens/ProfileScreen'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route element={<UserScreen />} path='/:user' />
           <Route element={<LoginScreen />} path='/login' />
           <Route element={<RegisterScreen />} path='/register' />
+          <Route element={<ProfileScreen />} path='/:user/:id' />
           <Route element={<CreatePostScreen />} path='/create' />
           <Route element={<PostScreen />} path='/:user/:slug' />
         </Routes>

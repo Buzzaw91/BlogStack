@@ -80,7 +80,7 @@ const getUserProfile = asyncHandler( async (req, res) => {
 
         const result = toCamelCase(rows)
 
-        return res.status(200).json(result)
+        return res.status(200).json(result[0])
     } catch(error) {
         console.error(error)
         return res.status(400).json({error})

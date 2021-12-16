@@ -145,15 +145,19 @@ export const featured = () => async (dispatch) => {
     }
 }
 
-export const userDetails = (id) => async (dispatch) => {
+export const getUserDetails = (id) => async (dispatch, getState) => {
     try {
         dispatch({
             type: USER_DETAILS_REQUEST
         })
 
+        const { userLogin: { userInfo } } = getState()
+        console.log(userInfo)
+
         const config = {
             headers: {
                 'Content-Type': 'application/json',
+                authorization: `Bearer ${userInfo.token}`
             },
         }
         const { data } = await axios.get(`/api/v1/users/profile/${id}`, config)
