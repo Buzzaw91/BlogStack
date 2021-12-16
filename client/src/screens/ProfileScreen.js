@@ -5,6 +5,7 @@ import { getUserDetails } from '../actions/userActions'
 import isEmpty from 'lodash.isempty'
 import Loader from '../components/Loader'
 import Error from '../components/Error'
+import Profile from '../components/Profile'
 
 
 
@@ -25,10 +26,9 @@ const ProfileScreen = () => {
     return (
         <>
             <div className='flex justify-center'>
-                <div className='container mx-auto flex-col items-center max-w-screen-md'>
                     {error ? <Error error={error} /> : null}
                     {loading ? <Loader />  : null}
-                </div>
+                    {isEmpty(user) ? null : <Profile user={user} />}
             </div>
         </>
     )
